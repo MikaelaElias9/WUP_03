@@ -14,31 +14,71 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+##Our goal is to answer this question     
+          
+Is there a difference between the alcohol consumed between the row in which is sat in?      
+        
+##Methods           
+Predict alcohol consumption based on where you sit       
+       
+ $H_0$ there is no difference between amount of alcohol consumed and where you sit     
+ $H_A$ there is a difference between the amount of alcohol consumed and where you sit    
+      
+Alcohol~Seat  
+  
+Alcohol is numerical , Seat is categorical       
+    
+We will use the helper file    
+Numerical~Categorical     
 
-## Now with ggplot - first select the basic data
 
-```{r}
-basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
-```
 ## Now add in boxplot
-
+```{r}
+basicCN <- ggplot(davisdata,aes(x=Seat,y=alcohol))
+```
 ```{r}
 basicCN + geom_boxplot()
 ```
-  
-  
+          
+The boxplot shows that students that sit in the back are more likely to consume more alcohol than those who sit in the middle and the front. 
+            
 ### get fancy  
 
 ```{r}
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
-
+           
+The fancy notch boxplot shows that students who sit in the back are more likely than those who sit in the middle or the front.  
+          
 ## Numerical Summarys 
 
+```{r}
+favstats(alcohol~Seat,data=ucdavis1)
+```
+            
+The numerical summary shows that student who sit in the back are 4.788 times more likely to consume more alcohol than those who sit in the front. It also shows that students who sit in the back are 1.437 times more likely to consume more alcohol than those who sit in the middle. 
+          
 ## Inferential Tests
-
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+          
+The Aov test shows that the p-value is 0.000116 which is less than 0.5 so I will reject the null hypothesis. 
+          
+I conclude that there is a difference in amount of alcohol consumed based on seating. 
+          
 ## Conclusions
+        
+The question is: Is there a difference between the alcohol consumed between the row in which is sat in?
 
-
+ $H_0$ there is no difference between amount of alcohol consumed and where you sit     
+ $H_A$ there is a difference between the amount of alcohol consumed and where you sit 
+ 
+ I reject the null hypothesis because...           
+The boxplot shows that students that sit in the back are more likely to consume more alcohol than those who sit in the middle and the front.           
+The fancy notch boxplot shows that students who sit in the back are more likely than those who sit in the middle or the front.            
+The numerical summary shows that student who sit in the back are 4.788 times more likely to consume more alcohol than those who sit in the front. It also shows that students who sit in the back are 1.437 times more likely to consume more alcohol than those who sit in the middle.       
+The Aov test shows that the p-value is 0.000116 which is less than 0.5 so I will reject the null hypothesis. 
+          
+I conclude that there is a difference in amount of alcohol consumed based on seating.
