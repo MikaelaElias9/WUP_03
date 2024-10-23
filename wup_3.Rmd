@@ -67,6 +67,12 @@ summary.aov(model1)
 The Aov test shows that the p-value is 0.000116 which is less than 0.5 so I will reject the null hypothesis. 
           
 I conclude that there is a difference in amount of alcohol consumed based on seating. 
+         
+```{r}
+plot(TukeyHSD(model1))
+```
+         
+The Tukey shows that both front-back and middle-back are different, but the middle-front is not different. 
           
 ## Conclusions
         
@@ -79,6 +85,7 @@ The question is: Is there a difference between the alcohol consumed between the 
 The boxplot shows that students that sit in the back are more likely to consume more alcohol than those who sit in the middle and the front.           
 The fancy notch boxplot shows that students who sit in the back are more likely than those who sit in the middle or the front.            
 The numerical summary shows that student who sit in the back are 4.788 times more likely to consume more alcohol than those who sit in the front. It also shows that students who sit in the back are 1.437 times more likely to consume more alcohol than those who sit in the middle.       
-The Aov test shows that the p-value is 0.000116 which is less than 0.5 so I will reject the null hypothesis. 
+The Aov test shows that the p-value is 0.000116 which is less than 0.5 so I will reject the null hypothesis.          
+The Tukey shows that both front-back and middle-back are different, but the middle-front is not different. 
           
 I conclude that there is a difference in amount of alcohol consumed based on seating.
